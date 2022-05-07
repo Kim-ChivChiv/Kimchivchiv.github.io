@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      @font-face {
+        font-family: KhmerOS_muollight;
+        src: url("KhmerOS_muollight.ttf");
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      body {
+        max-width: max-content;
+        margin: auto;
+      }
+
+      header {
+        text-align: center;
+      }
+
+      #table {
+        border-collapse: collapse;
+        margin-left: 1%;
+        margin-right: 1%;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        border: 1px solid;
+      }
+
+      th {
+        text-align: center;
+      }
+
+      #sub-total {
+        color: black;
+      }
+
+      input {
+        text-align: right;
+        color: black;
+        font-weight: bold;
+        border: none;
+        width: 98.5%;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+      }
+
+      #total-price-div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #total-price {
+        font-weight: bold;
+        margin-right: 1%;
+      }
+
+      #add-more-product {
+        margin: 1%;
+      }
+
+      #div-product {
+        display: flex;
+      }
+
+      #info-header {
+        margin-left: 1%;
+        margin-right: 1%;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #info-header h5 {
+        margin-top: 1%;
+      }
+
+      #ABA {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      @media print {
+        #add-more-product,
+        .delete-btn {
+          visibility: hidden;
+        }
+
+        table {
+          page-break-after: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+        td {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div id="ABA">
+        <div>
+          <h5 style="margin-bottom: 3%">
+            ABA: HAK KIMSRY <br />
+            ($) 000936993<br />
+            (៛) 001735650
+          </h5>
+          <h5 style="margin-top: 0; margin-bottom: 0">
+            Aceleda: Hak Kimsry <br />
+            012 69 44 92
+          </h5>
+        </div>
+
+        <div style="font-family: KhmerOS_muollight; font-size: 14px">
+          <h1 style="margin-bottom: 0">ស្រី ម៉ៅ</h1>
+          <h4 style="margin: 0">
+            បោះដុំសំលៀកបំពាក់ ក្មេងប្រុស~ស្រី គ្រប់ម៉ូត <br />ផ្ទះលេខ: 89 ផ្លូវ
+            310 ក្បែរផ្សារអូឡាំពិក
+          </h4>
+          <h5></h5>
+        </div>
+        <div style="flex-basis: 123.5px"></div>
+      </div>
+
+      <div id="info-header">
+        <h5>
+          <i class="fa fa-facebook-square"></i>
+          &nbsp; Kim ChivChiv
+        </h5>
+        <h5 id="invoice">INVOICE</h5>
+        <h5 style="text-align: right">
+          TEL: 012 694 492&nbsp;&nbsp;&nbsp; <br />
+          : 015 898 098&nbsp;&nbsp;&nbsp;<br />
+          : 071 43 69 292
+        </h5>
+      </div>
+    </header>
+    <table id="table">
+      <tr>
+        <th style="width: 40%">ឈ្មោះទំនិញ</th>
+        <th style="margin: 0">ចំនួន</th>
+        <th>តម្លៃ (៛)</th>
+        <th>សរុប</th>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" list="product-list" />
+          <datalist id="product-list"> </datalist>
+        </td>
+        <td>
+          <input
+            type="number"
+            name="quantity"
+            id="quantity0"
+            class="quantity"
+            value=""
+            oninput="calculateBoth(this)"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            name="price"
+            id="price0"
+            class="price"
+            value=""
+            oninput="calculateBoth(this)"
+          />
+        </td>
+        <td>
+          <input type="text" name="sub-total" id="sub-total0" disabled />
+        </td>
+      </tr>
+    </table>
+    <div id="total-price-div">
+      <button onclick="addMoreRow()" id="add-more-product">បន្ថែមផលិតផល</button>
+      <label for="total-pirce" id="total-price">សរុប</label>
+    </div>
+  </body>
+  <footer></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+  <script type="module" src="getData.js"></script>
+  <script src="Inventory.js"></script>
+</html>
