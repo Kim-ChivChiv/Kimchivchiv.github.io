@@ -36,6 +36,7 @@ function addMoreRow() {
   input_subTotal.setAttribute("type", "text");
   input_subTotal.setAttribute("name", "sub-total");
   input_subTotal.setAttribute("id", "sub-total" + countRow);
+  input_subTotal.setAttribute("class", "sub-total");
   input_subTotal.setAttribute("disabled", true);
 
   let btn_delete = document.createElement("button");
