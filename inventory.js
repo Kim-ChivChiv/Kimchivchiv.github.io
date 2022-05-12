@@ -103,11 +103,20 @@ function getDate() {
   const yyyy = today.getFullYear();
   let mm = today.getMonth() + 1; // Months start at 0!
   let dd = today.getDate();
+  let hh = today.getHours();
+  let min = today.getMinutes();
 
   if (dd < 10) dd = "0" + dd;
   if (mm < 10) mm = "0" + mm;
+  if (min < 10) min = "0" + min;
 
-  const date = dd + "/" + mm + "/" + yyyy;
+  if (hh > 12) {
+    hh -= 12;
+  } else if (hh === 0) {
+    hh = 12;
+  }
+
+  const date = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
 
   document.getElementById("invoice").innerHTML += `<br>` + date;
 }
