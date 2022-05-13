@@ -1,5 +1,8 @@
 let countRow = 0;
 
+document.getElementById("quantity0").addEventListener("input", calculateBoth);
+document.getElementById("price0").addEventListener("input", calculateBoth);
+
 function addMoreRow() {
   countRow++;
   let table = document.getElementById("table");
@@ -29,13 +32,13 @@ function addMoreRow() {
   input_price.setAttribute("value", "");
   input_price.setAttribute("id", "price" + countRow);
   input_price.setAttribute("class", "price");
-  input_price.setAttribute("oninput", "calculateBoth(this)");
 
   let input_subTotal = document.createElement("input");
   input_subTotal.setAttribute("type", "text");
-  input_subTotal.setAttribute("name", "sub-total");
-  input_subTotal.setAttribute("id", "sub-total" + countRow);
-  input_subTotal.setAttribute("class", "sub-total");
+  input_subTotal.setAttribute("name", "subTotal");
+  input_subTotal.setAttribute("id", "subTotal" + countRow);
+  input_subTotal.setAttribute("class", "subTotal");
+  input_subTotal.setAttribute("value", "0");
   input_subTotal.setAttribute("disabled", true);
 
   let btn_delete = document.createElement("button");
@@ -60,6 +63,8 @@ function addMoreRow() {
   table.appendChild(tr);
 
   btn_delete.addEventListener("click", DeleteRow);
+  input_quantity.addEventListener("input", calculateBoth);
+  input_price.addEventListener("input", calculateBoth);
 }
 
 function DeleteRow(e) {
@@ -68,22 +73,11 @@ function DeleteRow(e) {
   calculateTotalPrice();
 }
 
-function calculateSubTotal(inputId) {
-  let id = "";
-  if (inputId.id.length <= 6) id = inputId.id.charAt(inputId.id.length - 1);
-  else if (inputId.id.length > 6 && inputId.id.length < 8)
-    id =
-      inputId.id.charAt(inputId.id.length - 2) +
-      inputId.id.charAt(inputId.id.length - 1);
-  else if (inputId.id.length >= 100)
-    id =
-      inputId.id.charAt(inputId.id.length - 3) +
-      inputId.id.charAt(inputId.id.length - 2) +
-      inputId.id.charAt(inputId.id.length - 1);
+function calculateSubTotal(e) {
+  let quantity = e.target.closest("tr").querySelector(`[class=quantity]`).value;
+  let price = e.target.closest("tr").querySelector(`[class=price]`).value;
 
-  let price = document.getElementById("price" + id).value;
-  let quantity = document.getElementById("quantity" + id).value;
-  document.getElementById("sub-total" + id).value = (
+  e.target.closest("tr").querySelector(`[class=subTotal]`).value = (
     price * quantity
   ).toLocaleString("en");
 }
@@ -91,19 +85,21 @@ function calculateSubTotal(inputId) {
 function calculateTotalPrice() {
   let totalPrice = 0;
 
-  for (let i = 0; i <= countRow; i++) {
-    let subTotalPrice = document
-      .getElementById("sub-total" + i)
-      .value.replaceAll(",", "");
-
+  let tableRows = document.getElementById("table").rows;
+  for (i = 1; i < tableRows.length; i++) {
+    let subTotalPrice = tableRows[i].cells[3].children[0].value.replaceAll(
+      ",",
+      ""
+    );
     totalPrice += parseInt(subTotalPrice);
   }
+
   document.getElementById("total-price").innerText =
     "សរុប: " + totalPrice.toLocaleString();
 }
 
-function calculateBoth(inputId) {
-  calculateSubTotal(inputId);
+function calculateBoth(e) {
+  calculateSubTotal(e);
   calculateTotalPrice();
 }
 
