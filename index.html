@@ -158,14 +158,15 @@
       </div>
 
       <div id="info-header">
-        <h5>
+        <h5 style="flex-basis: 135.36px">
           <i class="fa fa-facebook-square"></i>
           &nbsp; Kim ChivChiv
         </h5>
         <h5 id="invoice">INVOICE</h5>
-        <h5 style="flex-basis: 104; display: inline-block">
-          លក់ជូន <input type="text" />
-        </h5>
+        <div style="display: flex; flex-direction: row">
+          <h5 style="margin-top: 2.5%">លក់ជូន</h5>
+          <input type="text" size="8" style="height: 40%" />
+        </div>
       </div>
     </header>
     <table id="table">
@@ -187,7 +188,6 @@
             id="quantity0"
             class="quantity"
             value=""
-            oninput="calculateBoth(this)"
           />
         </td>
         <td>

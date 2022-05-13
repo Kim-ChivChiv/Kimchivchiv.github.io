@@ -22,7 +22,6 @@ function addMoreRow() {
   input_quantity.setAttribute("value", "");
   input_quantity.setAttribute("class", "quantity");
   input_quantity.setAttribute("id", "quantity" + countRow);
-  input_quantity.setAttribute("oninput", "calculateBoth(this)");
 
   let input_price = document.createElement("input");
   input_price.setAttribute("type", "number");
