@@ -70,7 +70,17 @@ function DeleteRow(e) {
 }
 
 function calculateSubTotal(inputId) {
-  let id = inputId.id.charAt(inputId.id.length - 1);
+  let id = "";
+  if (inputId.id.length <= 6) id = inputId.id.charAt(inputId.id.length - 1);
+  else if (inputId.id.length > 6 && inputId.id.length < 8)
+    id =
+      inputId.id.charAt(inputId.id.length - 2) +
+      inputId.id.charAt(inputId.id.length - 1);
+  else if (inputId.id.length >= 100)
+    id =
+      inputId.id.charAt(inputId.id.length - 3) +
+      inputId.id.charAt(inputId.id.length - 2) +
+      inputId.id.charAt(inputId.id.length - 1);
 
   let price = document.getElementById("price" + id).value;
   let quantity = document.getElementById("quantity" + id).value;
